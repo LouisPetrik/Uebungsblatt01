@@ -7,6 +7,6 @@
 <title>Insert title here</title>
 </head>
 <body>
-	Bis zum nächsten Mal, ${ vorname }, ${ nachname }!
+	Bis zum nächsten Mal, ${ email }!
 </body>
 </html>

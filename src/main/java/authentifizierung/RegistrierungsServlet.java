@@ -14,8 +14,6 @@ import javax.servlet.http.HttpSession;
  */
 
 
-
-
 @WebServlet("/RegistrierungsServlet")
 public class RegistrierungsServlet extends HttpServlet {
 	
@@ -39,11 +37,11 @@ public class RegistrierungsServlet extends HttpServlet {
 
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
-	 */
+
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		response.getWriter().append("Served at: ").append(request.getContextPath());
-	}
+	}	 */
 	
 	/**
 	 * 	Eine Funktion die an die registrierung.jsp zurückgibt, dass bei der Registrierung ein 
@@ -147,7 +145,7 @@ public class RegistrierungsServlet extends HttpServlet {
 		}
 		
 		
-		doGet(request, response);
+		//doGet(request, response);
 	}
 
 }

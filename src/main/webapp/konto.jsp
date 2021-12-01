@@ -8,11 +8,13 @@
 </head>
 <body>
 	<p>Hallo! ${ vorname } ${ nachname }</p>
-	<p>Ihre email: ${ email }</p>
+	<p>Ihre email über session: ${ sessionScope['bank.email'] }</p>
 	
-	<p>Name über Session: ${ sessionScope.username } </p>
 	
 	<p>Hier können Sie ein Konto anlegen:</p>
+	
+	<p>Liste der konten in der session ${ sessionScope['bank.kontennamenListe'] }</p>
+	
 	
 	<form method="POST" action="KontoServlet">
 		<input type="text" name="kontoname" placeholder="Kontoname" /> 

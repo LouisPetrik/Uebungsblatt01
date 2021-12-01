@@ -47,6 +47,12 @@ public class LogoutServlet extends HttpServlet {
 		
 		HttpSession session = request.getSession(); 
 		
+		String emailSession = (String) session.getAttribute("email"); 
+		
+		System.out.println("Email in der Session: " + emailSession); 
+		
+
+		
 		ArrayList<Kunde> kundenliste = (ArrayList<Kunde>) session.getAttribute("bank.kundenliste"); 
 		
 		for (Kunde kunde : kundenliste) {
@@ -54,8 +60,15 @@ public class LogoutServlet extends HttpServlet {
 				
 			}
 		}
-
+		
+		// muss noch gegen richtigen vor und nachnamen getauscht werden. 
+		request.setAttribute("email", emailSession); 
 		request.getRequestDispatcher("logout.jsp").forward(request, response); 
+		
+		// session invalidieren 
+		
+		session.invalidate(); 
+				
 		doGet(request, response);
 	}
 

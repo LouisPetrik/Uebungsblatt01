@@ -11,7 +11,10 @@ public class Kunde {
 	public String bankinstitut; 
 	public String passwort; 
 	public Boolean newsletter; 
-	public Konto kontenlist; 
+	
+	// Ein nutzer kann mehrere Konten haben, die als Liste von Konten-Objekten gespeichert werden. 
+	public ArrayList<Konto> kontenliste = new ArrayList<>();
+	
 	
 	public Kunde(String vorname, String nachname, Integer alter, String email, String bankinstitut, String passwort, Boolean newsletter) {
 		this.vorname = vorname; 

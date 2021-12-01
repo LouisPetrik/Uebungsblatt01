@@ -15,6 +15,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import banking.Konto;
 import banking.Kunde; 
 
 
@@ -32,11 +33,12 @@ public class LoginServlet extends HttpServlet {
 
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
-	 */
+
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		response.getWriter().append("Served at: ").append(request.getContextPath());
 	}
+		 */
 
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
@@ -71,9 +73,25 @@ public class LoginServlet extends HttpServlet {
 				request.setAttribute("nachname", kunde.nachname); 
 				request.setAttribute("email", kunde.email); 
 				
+				// Session für den angemeldeten Kunden anlegen. 
 				// setzt die email des aktuell angemeldeten Kunden als Session wert
 				// Die email weil vor und nachname nicht einzigartig sein müssen. 
-				session.setAttribute("email", kunde.email); 
+				session.setAttribute("bank.email", kunde.email); 
+				
+				
+				// übergeben einer Liste an Konten zur Kontrolle: 
+				// dafür nur eine Liste von Namen der Konten anlegen: 
+				ArrayList<String> kontennamenListe = new ArrayList<String>(); 
+				
+				for (Konto konto : kunde.kontenliste) {
+					kontennamenListe.add(konto.kontoname); 
+				}
+				
+				session.setAttribute("bank.kontennamenListe", kontennamenListe); 
+				
+				System.out.println("Liste von Konten: " + kontennamenListe); 
+				
+				request.setAttribute("kontennamenListe", kontennamenListe); 
 				
 				request.getRequestDispatcher("konto.jsp").forward(request, response);
 			} 
@@ -87,7 +105,7 @@ public class LoginServlet extends HttpServlet {
 		} 
 		
 		
-		doGet(request, response);
+		//doGet(request, response);
 	}
 
 }
