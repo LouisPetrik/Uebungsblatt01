@@ -69,6 +69,11 @@ public class LoginServlet extends HttpServlet {
 				// Vor und Nachname des erfolgreich eingeloggten Kunden zur Begrüßung übergeben 
 				request.setAttribute("vorname", kunde.vorname);
 				request.setAttribute("nachname", kunde.nachname); 
+				request.setAttribute("email", kunde.email); 
+				
+				// setzt die email des aktuell angemeldeten Kunden als Session wert
+				// Die email weil vor und nachname nicht einzigartig sein müssen. 
+				session.setAttribute("email", kunde.email); 
 				
 				request.getRequestDispatcher("konto.jsp").forward(request, response);
 			} 

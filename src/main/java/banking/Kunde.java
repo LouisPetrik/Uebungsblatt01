@@ -1,5 +1,8 @@
 package banking;
 
+import banking.Konto; 
+import java.util.ArrayList;
+
 public class Kunde {
 	public String vorname; 
 	public String nachname; 
@@ -8,6 +11,7 @@ public class Kunde {
 	public String bankinstitut; 
 	public String passwort; 
 	public Boolean newsletter; 
+	public Konto kontenlist; 
 	
 	public Kunde(String vorname, String nachname, Integer alter, String email, String bankinstitut, String passwort, Boolean newsletter) {
 		this.vorname = vorname; 

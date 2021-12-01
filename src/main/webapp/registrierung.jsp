@@ -32,6 +32,8 @@
 		
 		<br/>
 		<p>${ fehlertyp }</p>
+		
+		<p>Kundenliste: ${sessionScope.kundenliste}</p>
 	</form>
 </body>
 </html>
