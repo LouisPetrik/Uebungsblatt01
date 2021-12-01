@@ -8,5 +8,10 @@
 </head>
 <body>
 	hier können sie sich anmelden 
+	
+	<form method="POST" action="LoginServlet">
+		<input type="text" name="email" placeholder="Ihre E-Mail Adresse" required />
+		<input type="passwort" name="passwort" placeholder="Ihr Passwort" required /> 
+	</form>
 </body>
 </html>

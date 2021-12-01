@@ -9,7 +9,10 @@
 <body>
 	Hallo Kunde! 
 	
+	
 	<!--  falls der user noch nicht eingeloggt ist -->
-	Bitte <a href="login.jsp">melden Sie sich an</a>, oder <a href="registrierung.jsp">registrieren Sie sich</a>, falls Sie noch kein Konto bei uns besitzen. 
+	Bitte <a href="login.jsp">melden Sie sich an</a>, oder <a href="registrierung.jsp">registrieren Sie sich</a>, falls Sie noch kein Konto bei uns besitzen.
+	
+	
 </body>
 </html>

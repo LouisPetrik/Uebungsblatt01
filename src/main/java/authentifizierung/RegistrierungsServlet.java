@@ -6,13 +6,27 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-
+import banking.Kunde;
+import java.util.ArrayList; 
+import javax.servlet.http.HttpSession;
 /**
  * Servlet implementation class RegistrierungsServlet
  */
 
+
+
+
 @WebServlet("/RegistrierungsServlet")
 public class RegistrierungsServlet extends HttpServlet {
+	
+	/* Speichert die Liste aller registrierten Kunden. 
+	 * Eventuell ist ein normales Array hinreichend, aber mal sehen. 
+	 * sollte vielleicht in ein anderes Scope, aber für jetzt passt das.
+	 * Diese Liste soll noch in der Session gespeichert werden. 
+	 */ 
+	ArrayList<Kunde> kundenliste = new ArrayList<Kunde>(); 
+	
+	
 	private static final long serialVersionUID = 1L;
        
     /**
@@ -38,6 +52,10 @@ public class RegistrierungsServlet extends HttpServlet {
 		// Die Logik für ein einzelnes Kundenobjekt findet sich in der entsprechenden Datei Kunde.java
 		
 		System.out.println("POST ist angekommen "); 
+		
+		// Sämtliche Daten des registrierenden Kundens in einzelnen Variablen speichern. 
+		// Bis auf das doppelte Passwort und ob der Kunde die Geschäftsbedingungen akzeptiert, 
+		// wird alles gespeichert. 
 		String vorname = request.getParameter("vorname"); 
 		String nachname = request.getParameter("nachname"); 
 		Integer alter = Integer.parseInt(request.getParameter("alter")); 
@@ -46,7 +64,8 @@ public class RegistrierungsServlet extends HttpServlet {
 		String passwort = request.getParameter("passwort"); 
 		Boolean newsletter = false; 
 		
-		// Ob der user newsletter haben will oder nicht zu einem Bool machen 
+		// Da ob der Kunde den Newsletter haben möchte in einem Bool gespeichert werden kann, 
+		// das Form aber einen String sendet wird ob ja oder nein hier zu einem Boolean verwandelt. 
 		if (request.getParameter("newsletter") != null) {
 			newsletter = true; 
 		} 
@@ -59,7 +78,23 @@ public class RegistrierungsServlet extends HttpServlet {
 		System.out.println(bankinstitut); 
 		System.out.println(passwort); 
 		System.out.println(newsletter); 
+		
+		// Erstellen des Kundenobjekts: 
+		Kunde kunde = new Kunde(vorname, nachname, alter, email, bankinstitut, passwort, newsletter); 
+		
 
+		kundenliste.add(kunde); 
+		
+		HttpSession session = request.getSession(); 
+		
+		session.setAttribute("kundenliste", kundenliste); 
+		
+		System.out.println(kundenliste.get(0)); 
+		
+		// Nutzer wieder an index.jsp weiterleiten: 
+		// Dies sollte nur geschehen, wenn die Registrierung faktisch erfolgreich ist 
+		// Die notwendigen Bedingugen dafür sind noch nicht ganz fertig - z. B. confirm passwort. 
+		request.getRequestDispatcher("index.jsp").forward(request, response); 
 		
 		doGet(request, response);
 	}
