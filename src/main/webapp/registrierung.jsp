@@ -16,8 +16,8 @@
 		<input type="email" name="email" placeholder="E-Mail Adresse" required/> 
 		<input type="text" name="bankinstitut" placeholder="Bankinstitut" required/> 
 		<input type="password" name="passwort" placeholder="Wählen Sie ihr Passwort" required/> 
-		<!--  hier fehlt noch funktionalität für wirklichen password check - dürfen wir JS nutzen? -->
-		<input type="password" placeholder="Passwort wiederholen" required/>
+		<!-- Soweit ich Jakob verstanden habe, sollen wir serverseitig auf confirm password checken -->
+		<input type="password" name="passwortBestätigung" placeholder="Passwort wiederholen" required/>
 		
 		<br/>
 
@@ -29,6 +29,10 @@
 		
 		<br/>
 		<input type="submit" value="Registrieren"/>
+		
+		<br/>
+		<p>Falls fehler aufgetreten: </p>
+		<p>${ fehlertyp }</p>
 	</form>
 </body>
 </html>
