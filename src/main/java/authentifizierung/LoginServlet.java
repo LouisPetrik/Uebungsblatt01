@@ -51,24 +51,37 @@ public class LoginServlet extends HttpServlet {
 		
 		// aus der session die kunden in eine arrayliste laden: 
 		HttpSession session = request.getSession(); 
+		// Das scheint irgendwie ekelig zu sein, klappt aber. 
 		ArrayList<Kunde> kundenliste = (ArrayList<Kunde>) session.getAttribute("bank.kundenliste"); 
 		
 		
 		System.out.println(kundenliste.get(0)); 
 		
+		// Falls auf den zustand noch mehrfach zugegriffen werden muss. 
 		Boolean eingeloggt = false; 
+
 		
 		// checken, ob nutzer wirklich registiert ist: 
 		for (Kunde kunde : kundenliste) {
 			if (kunde.email.equals(email) && kunde.passwort.equals(passwort)) {
-				System.out.println("Kunde erfolgreich eingeloggt"); 
 				eingeloggt = true; 
+					
+				// Vor und Nachname des erfolgreich eingeloggten Kunden zur Begrüßung übergeben 
+				request.setAttribute("vorname", kunde.vorname);
+				request.setAttribute("nachname", kunde.nachname); 
+				
+				request.getRequestDispatcher("konto.jsp").forward(request, response);
 			} 
 		}
 		
 		if (!eingeloggt) {
 			System.out.println("Email oder passwort ist falsch"); 
-		}
+			request.setAttribute("fehlertyp", "E-Mail oder Passwort ist falsch"); 
+			
+			request.getRequestDispatcher("login.jsp").forward(request, response); 
+		} 
+		
+		
 		doGet(request, response);
 	}
 

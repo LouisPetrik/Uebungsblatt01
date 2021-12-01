@@ -14,5 +14,7 @@
 		<input type="password" name="passwort" placeholder="Ihr Passwort" required /> 
 		<input type="submit" value="Anmelden" />
 	</form>
+
+	<p>${fehlertyp}</p>
 </body>
 </html>

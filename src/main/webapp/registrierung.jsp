@@ -31,7 +31,6 @@
 		<input type="submit" value="Registrieren"/>
 		
 		<br/>
-		<p>Falls fehler aufgetreten: </p>
 		<p>${ fehlertyp }</p>
 	</form>
 </body>
