@@ -11,7 +11,7 @@
 	
 	<form method="POST" action="LoginServlet">
 		<input type="text" name="email" placeholder="Ihre E-Mail Adresse" required />
-		<input type="passwort" name="passwort" placeholder="Ihr Passwort" required /> 
+		<input type="password" name="passwort" placeholder="Ihr Passwort" required /> 
 		<input type="submit" value="Anmelden" />
 	</form>
 </body>

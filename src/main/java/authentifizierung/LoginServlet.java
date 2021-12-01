@@ -6,11 +6,16 @@ package authentifizierung;
  * 
  */
 import java.io.IOException;
+import java.util.ArrayList;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+
+import banking.Kunde; 
 
 
 @WebServlet("/LoginServlet")
@@ -44,8 +49,26 @@ public class LoginServlet extends HttpServlet {
 		System.out.println(email); 
 		System.out.println(passwort); 
 		
-		// checken, ob nutzer wirklich registiert ist: 
+		// aus der session die kunden in eine arrayliste laden: 
+		HttpSession session = request.getSession(); 
+		ArrayList<Kunde> kundenliste = (ArrayList<Kunde>) session.getAttribute("bank.kundenliste"); 
 		
+		
+		System.out.println(kundenliste.get(0)); 
+		
+		Boolean eingeloggt = false; 
+		
+		// checken, ob nutzer wirklich registiert ist: 
+		for (Kunde kunde : kundenliste) {
+			if (kunde.email.equals(email) && kunde.passwort.equals(passwort)) {
+				System.out.println("Kunde erfolgreich eingeloggt"); 
+				eingeloggt = true; 
+			} 
+		}
+		
+		if (!eingeloggt) {
+			System.out.println("Email oder passwort ist falsch"); 
+		}
 		doGet(request, response);
 	}
 

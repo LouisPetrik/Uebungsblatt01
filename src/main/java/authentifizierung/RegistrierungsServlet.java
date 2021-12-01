@@ -134,9 +134,9 @@ public class RegistrierungsServlet extends HttpServlet {
 			
 			HttpSession session = request.getSession(); 
 			
-			session.setAttribute("kundenliste", kundenliste); 
+			session.setAttribute("bank.kundenliste", kundenliste); 
 			
-			System.out.println(kundenliste.get(0)); 
+			System.out.println("Kundenliste ist da " + kundenliste.get(0)); 
 			
 			// Nutzer wieder an index.jsp weiterleiten: 
 			// Dies sollte nur geschehen, wenn die Registrierung faktisch erfolgreich ist 
