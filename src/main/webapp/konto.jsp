@@ -17,7 +17,10 @@
 		
 		<h2>Hier können sie weitere Konten anlegen:</h2>
 		
-		<p>Liste der konten in der session ${ sessionScope['bank.kontennamenListe'] }</p>
+		<p>Liste ihrer Konten bei uns: </p>
+		<ul>
+			${ sessionScope['bank.kontennamenListe'] }
+		</ul>
 		
 		
 		<form method="POST" action="KontoServlet">

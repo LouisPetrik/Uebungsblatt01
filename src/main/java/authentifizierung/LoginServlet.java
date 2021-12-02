@@ -133,15 +133,38 @@ public class LoginServlet extends HttpServlet {
 					// dafür nur eine Liste von Namen der Konten anlegen: 
 					ArrayList<String> kontennamenListe = new ArrayList<String>(); 
 					
-					for (Konto konto : kunde.kontenliste) {
-						kontennamenListe.add(konto.kontoname); 
+					
+					// auch hier muss noch die Logik für das Erstellen einer HTML Liste an Kontennamen 
+					// durchgeführt werden, da man anfangs von LoginServlet direkt auf die konto.jsp kommt. 
+					// Dieses Servlet muss also eine liste bereitstellen, genauso wie die KontoServlet, 
+					// die nach jedem hinzugefügten Konto aufgerufen wird um eine neue HTML Liste der Konten 
+					// zu erstellen
+			
+					// Falls die Liste der Konten des Kundens NICHT leer ist
+					if (!kunde.kontenliste.isEmpty()) {
+						//  Der Strinbuilder für das konstruieren der HTML Liste der Kontennamen des Kunden
+						StringBuilder sb = new StringBuilder(); 
+						
+						for (Konto konto : kunde.kontenliste) {
+							// Der HTML Liste ein Listeneintrag mit namen des Kontos hinzufügen 
+							sb.append("<li>" + konto.kontoname + "</li>"); 
+							
+							// Hinzufügen der Konten in die Liste die zur Kontrolle dient 
+							kontennamenListe.add(konto.kontoname); 
+						}
+						
+						String kontennamenListeHTML = sb.toString(); 
+						
+						session.setAttribute("bank.kontennamenListe", kontennamenListeHTML); 
+					} else {
+						System.out.println("Beim Einloggen: Der Kunde hat noch keine Konten."); 
+						// Falls der Kunde noch keine Konten hat: 
+						session.setAttribute("bank.kontennamenListe", "<b>Sie haben bisher keine Konten bei uns</b>"); 
 					}
 					
-					session.setAttribute("bank.kontennamenListe", kontennamenListe); 
-					
+			
+					// nur zur überprüfung
 					System.out.println("Liste von Konten: " + kontennamenListe); 
-					
-					request.setAttribute("kontennamenListe", kontennamenListe); 
 					
 					request.getRequestDispatcher("konto.jsp").forward(request, response);
 				} 
