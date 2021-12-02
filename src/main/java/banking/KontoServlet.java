@@ -99,6 +99,10 @@ public class KontoServlet extends HttpServlet {
 		session.setAttribute("bank.kundenliste", kundenliste); 
 		
 		// der session das neu erstelle konto hinzufügen: 
+		String kontennamenListeHTML;
+		
+	
+		
 		session.setAttribute("bank.kontennamenListe", kontennamenListe); 
 		
 		// Hier muss irgendwie ein redirect auf LoginServlet GET klappen 
