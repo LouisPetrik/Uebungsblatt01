@@ -92,6 +92,9 @@ public class LoginServlet extends HttpServlet {
 					// Die email weil vor und nachname nicht einzigartig sein müssen. 
 					session.setAttribute("bank.email", kunde.email); 
 					
+					// Statt vorname, nachname etc. probieren das gesamte kundenobjekt in session zu speichern 
+					session.setAttribute("bank.kunde", kunde); 
+					
 					
 					// übergeben einer Liste an Konten zur Kontrolle: 
 					// dafür nur eine Liste von Namen der Konten anlegen: 
