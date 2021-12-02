@@ -71,15 +71,21 @@ public class LoginServlet extends HttpServlet {
 			for (Kunde kunde : kundenliste) {
 				if (kunde.email.equals(email) && kunde.passwort.equals(passwort)) {
 					eingeloggt = true; 
-						
+					
+					
+					
 					// Vor und Nachname des erfolgreich eingeloggten Kunden zur Begrüßung übergeben 
+					
+					// vermutlich überflüssig
+					/*
 					request.setAttribute("vorname", kunde.vorname);
 					request.setAttribute("nachname", kunde.nachname); 
 					request.setAttribute("email", kunde.email); 
-					
+					*/
+			
 					session.setAttribute("bank.vorname", kunde.vorname); 
 					session.setAttribute("bank.nachname", kunde.nachname); 
-					session.setAttribute("email", kunde.email); 
+					// session.setAttribute("email", kunde.email); 
 					
 					// Session für den angemeldeten Kunden anlegen. 
 					// setzt die email des aktuell angemeldeten Kunden als Session wert
