@@ -29,6 +29,7 @@ public class LoginServlet extends HttpServlet {
     public LoginServlet() {
         super();
         // TODO Auto-generated constructor stub
+        System.out.println("LoginServlet wird genutzt!"); 
     }
     
 
@@ -39,15 +40,13 @@ public class LoginServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// abfangen, wenn jemand die Konto.jsp neuladen will, weil die URL dazu tatsächlih 
 		// die LoginServlet ist, und nicht /konto.jsp
-		
+	
 		
 		HttpSession session = request.getSession(); 
 		// Das scheint irgendwie ekelig zu sein, klappt aber. 
 		ArrayList<Kunde> kundenliste = (ArrayList<Kunde>) session.getAttribute("bank.kundenliste"); 
 		
 		for (Kunde kunde : kundenliste) {
-	
-	
 		
 				// Vor und Nachname des erfolgreich eingeloggten Kunden zur Begrüßung übergeben 
 				request.setAttribute("vorname", kunde.vorname);
@@ -119,6 +118,10 @@ public class LoginServlet extends HttpServlet {
 					request.setAttribute("vorname", kunde.vorname);
 					request.setAttribute("nachname", kunde.nachname); 
 					request.setAttribute("email", kunde.email); 
+					
+					session.setAttribute("bank.vorname", kunde.vorname); 
+					session.setAttribute("bank.nachname", kunde.nachname); 
+					session.setAttribute("email", kunde.email); 
 					
 					// Session für den angemeldeten Kunden anlegen. 
 					// setzt die email des aktuell angemeldeten Kunden als Session wert
