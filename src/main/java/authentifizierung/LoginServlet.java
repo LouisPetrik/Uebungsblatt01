@@ -38,54 +38,9 @@ public class LoginServlet extends HttpServlet {
      * die Daten verloren gehen - was leider ziemlich nervig ist. 
      */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// abfangen, wenn jemand die Konto.jsp neuladen will, weil die URL dazu tatsächlih 
-		// die LoginServlet ist, und nicht /konto.jsp
-	
-		
-		HttpSession session = request.getSession(); 
-		// Das scheint irgendwie ekelig zu sein, klappt aber. 
-		ArrayList<Kunde> kundenliste = (ArrayList<Kunde>) session.getAttribute("bank.kundenliste"); 
-		
-		for (Kunde kunde : kundenliste) {
-		
-				// Vor und Nachname des erfolgreich eingeloggten Kunden zur Begrüßung übergeben 
-				request.setAttribute("vorname", kunde.vorname);
-				request.setAttribute("nachname", kunde.nachname); 
-				request.setAttribute("email", kunde.email); 
-				
-				// Session für den angemeldeten Kunden anlegen. 
-				// setzt die email des aktuell angemeldeten Kunden als Session wert
-				// Die email weil vor und nachname nicht einzigartig sein müssen. 
-				session.setAttribute("bank.email", kunde.email); 
-				
-				
-				// übergeben einer Liste an Konten zur Kontrolle: 
-				// dafür nur eine Liste von Namen der Konten anlegen: 
-				ArrayList<String> kontennamenListe = new ArrayList<String>(); 
-				
-				for (Konto konto : kunde.kontenliste) {
-					kontennamenListe.add(konto.kontoname); 
-				}
-				
-				session.setAttribute("bank.kontennamenListe", kontennamenListe); 
-				
-				System.out.println("Liste von Konten: " + kontennamenListe); 
-				
-				request.setAttribute("kontennamenListe", kontennamenListe); 
-				
-				request.getRequestDispatcher("konto.jsp").forward(request, response);
-			} 
-		}
+		request.getRequestDispatcher("konto.jsp").forward(request, response);
+	}
 
-
-	/**
-	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
-
-		 */
-
-	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
-	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		String email = request.getParameter("email"); 

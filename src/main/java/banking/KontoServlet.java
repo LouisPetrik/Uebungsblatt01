@@ -46,18 +46,14 @@ public class KontoServlet extends HttpServlet {
         // TODO Auto-generated constructor stub
     }
 
-	/**
-	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
-
+    
+    
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		response.getWriter().append("Served at: ").append(request.getContextPath());
+		// Hier wird abgefangen, falls jemand nachdem Aufruf der KontoServlet URL die Seite neulädt, also 
+		// einen GET-Request an /KontoServlet durchführt - in diesem Fall soll das direkt weiter an die konto.jsp, die alle 
+		// Inhalte darstellt. 
+		request.getRequestDispatcher("konto.jsp").forward(request, response);
 	}
-		 */
-
-	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
-	 */
     
     
 	
