@@ -2,11 +2,9 @@
     pageEncoding="ISO-8859-1"%>
 <!DOCTYPE html>
 <html>
-<head>
-<meta charset="ISO-8859-1">
-<title>Insert title here</title>
-</head>
+	<jsp:include page="head.jsp" />
 <body>
+	<jsp:include page="navigation.jsp" />
 	hier können sie sich registrieren 
 	
 	<form method="POST" action="RegistrierungsServlet">
@@ -35,5 +33,7 @@
 		
 		<p>Kundenliste: ${sessionScope.kundenliste}</p>
 	</form>
-</body>
+	
+	<jsp:include page="footer.jsp" />
+</body> 
 </html>

@@ -2,11 +2,9 @@
     pageEncoding="ISO-8859-1"%>
 <!DOCTYPE html>
 <html>
-<head>
-<meta charset="ISO-8859-1">
-<title>Insert title here</title>
-</head>
+	<jsp:include page="head.jsp" />
 <body>
+	<jsp:include page="navigation.jsp" />
 	<p>Hallo! ${ vorname } ${ nachname }</p>
 	<p>Ihre email über session: ${ sessionScope['bank.email'] }</p>
 	
@@ -30,7 +28,7 @@
 	</form>
 	
 	<h2>Kontostand.xls Datei hochladen</h2>
-	<a href="KontoServlet"
-	
+
+	<jsp:include page="footer.jsp" />
 </body>
 </html>
