@@ -7,32 +7,7 @@
 	<jsp:include page="navigation.jsp" />
 	hier können sie sich registrieren 
 	
-	<form method="POST" action="RegistrierungsServlet">
-		<input type="text" name="vorname" placeholder="Vorname"required/>
-		<input type="text" name="nachname" placeholder="Nachname" required/>
-		<input type="number" name="alter" placeholder="Alter" required/> 
-		<input type="email" name="email" placeholder="E-Mail Adresse" required/> 
-		<input type="text" name="bankinstitut" placeholder="Bankinstitut" required/> 
-		<input type="password" name="passwort" placeholder="Wählen Sie ihr Passwort" required/> 
-		<!-- Soweit ich Jakob verstanden habe, sollen wir serverseitig auf confirm password checken -->
-		<input type="password" name="passwortBestätigung" placeholder="Passwort wiederholen" required/>
-		
-		<br/>
 
-		<label for="bedingungen">Ich akzeptiere die Geschäftsbedingungen</label>
-		<input type="checkbox" name="bedingungen" required/> 
-		<br/>
-		<label for="newsletter">Ich möchte den Newsletter erhalten (optional)</label>
-		<input type="checkbox" name="newsletter" />
-		
-		<br/>
-		<input type="submit" value="Registrieren"/>
-		
-		<br/>
-		<p>${ fehlertyp }</p>
-		
-		<p>Kundenliste: ${sessionScope.kundenliste}</p>
-	</form>
 	
 	<div class="container">
 		<form method="POST" action="RegistrierungsServlet">
