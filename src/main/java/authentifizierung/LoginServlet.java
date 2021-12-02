@@ -64,7 +64,10 @@ public class LoginServlet extends HttpServlet {
 		if (!(kundenliste == null)) {
 			// ab hier alles für den Fall, dass es überhaupt Kunden in der DB gibt
 			
-			// checken, ob nutzer wirklich registiert ist: 
+			/*
+			 * Testen, ob der Nutzer der sich anmelden will, wirklich registiert ist. 
+			 * Dabei nutzen wir die ArrayListe, die aus der Session geladen wurde und als DB dient. 
+			 */
 			for (Kunde kunde : kundenliste) {
 				if (kunde.email.equals(email) && kunde.passwort.equals(passwort)) {
 					eingeloggt = true; 
