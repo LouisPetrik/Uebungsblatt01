@@ -5,11 +5,13 @@
 	<jsp:include page="head.jsp" />
 <body>
 	<jsp:include page="navigation.jsp" />
-	hier können sie sich registrieren 
+
 	
 
 	
 	<div class="container">
+		<h1>Sie haben noch kein Konto bei uns?</h1>
+		<h2>Dann ist es an der Zeit das zu ändern</h2>
 		<form method="POST" action="RegistrierungsServlet">
 		  <div class="mb-3">
 		    <input type="text" name="vorname" placeholder="Vorname" class="form-control" required>
@@ -54,7 +56,9 @@
 		  <button type="submit" class="btn btn-primary">Registrieren</button>
 		</form>
 		
-		<p>${ fehlertyp }</p>
+
+		<p class="text-danger">${ fehlertyp }</p>
+
 	</div>
 	
 	<jsp:include page="footer.jsp" />

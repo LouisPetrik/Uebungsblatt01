@@ -1,5 +1,13 @@
 @charset "ISO-8859-1";
 
+h1 {
+	font-size: 30px !important; 
+	margin: 20px 0px 20px 0px; 
+}
+
+h2 {
+	font-size: 20px !important; 
+}
 .footer {
   position: fixed;
   left: 0;
