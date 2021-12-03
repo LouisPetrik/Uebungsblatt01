@@ -71,9 +71,7 @@ public class LoginServlet extends HttpServlet {
 			for (Kunde kunde : kundenliste) {
 				if (kunde.email.equals(email) && kunde.passwort.equals(passwort)) {
 					eingeloggt = true; 
-					
-					
-					
+							
 					// Vor und Nachname des erfolgreich eingeloggten Kunden zur Begrüßung übergeben 
 					
 					// vermutlich überflüssig
@@ -82,19 +80,18 @@ public class LoginServlet extends HttpServlet {
 					request.setAttribute("nachname", kunde.nachname); 
 					request.setAttribute("email", kunde.email); 
 					*/
-			
-					session.setAttribute("bank.vorname", kunde.vorname); 
-					session.setAttribute("bank.nachname", kunde.nachname); 
-					// session.setAttribute("email", kunde.email); 
+					
+					
+					session.setAttribute("kunde", kunde); 
 					
 					// Session für den angemeldeten Kunden anlegen. 
 					// setzt die email des aktuell angemeldeten Kunden als Session wert
 					// Die email weil vor und nachname nicht einzigartig sein müssen. 
-					session.setAttribute("bank.email", kunde.email); 
-					
-					// Statt vorname, nachname etc. probieren das gesamte kundenobjekt in session zu speichern 
-					session.setAttribute("bank.kunde", kunde); 
-					
+					//session.setAttribute("bank.email", kunde.email); 
+
+					System.out.println("session vorname " + session.getAttribute("kunde.vorname")); 
+					System.out.println("session vorname " + session.getAttribute("kunde.nachname")); 
+				
 					
 					// übergeben einer Liste an Konten zur Kontrolle: 
 					// dafür nur eine Liste von Namen der Konten anlegen: 

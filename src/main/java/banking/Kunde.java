@@ -23,6 +23,39 @@ public class Kunde {
 		this.email = email; 
 		this.bankinstitut = bankinstitut; 
 		this.passwort = passwort; 
-		this.newsletter = newsletter; 
+		this.newsletter = newsletter;
+		
+	}
+	
+	/* Hier folgen sämtliche Getter-Methoden für das Kundenobjekt. 
+	Sie helfen dabei, dass Objekt-Werte in den Templates genutzt werden können und 
+	schützen vor versehentlichen mutaten beim Zugriff auf die Attribute via .-Syntax. 
+	*/
+	public String getVorname() {
+		return this.vorname; 
+	}
+	
+	public String getNachname() {
+		return this.nachname; 
+	}
+	
+	public String getEmail() {
+		return this.email;
+	}
+	
+	public Integer getAlter() {
+		return this.alter; 
+	}
+	
+	public String getBankinstitut() {
+		return this.bankinstitut; 
+	}
+	
+	public String getPasswort() {
+		return this.passwort; 
+	}
+	
+	public Boolean getNewsletter() {
+		return this.newsletter; 
 	}
 }

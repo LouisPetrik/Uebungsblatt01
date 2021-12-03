@@ -10,7 +10,7 @@
 	<!--  falls der user noch nicht eingeloggt ist -->
 	
 	<div class="container">
-		<h1>Hallo Kunde!</h1>
+		<h1>Hallo ${ sessionScope.kunde.getVorname() } ${ sessionScope.kunde.getNachname() }</h1>
 		<div class="card">
 		  <div class="card-body">
 		   	Falls Sie bereits angemeldet sind, erscheint ihre E-Mail hier: 
@@ -18,7 +18,7 @@
 		</div>
 		
 		<div class="alert alert-success" role="alert">
-			${ sessionScope['bank.email'] }
+			${ sessionScope.kunde.getEmail() }
 		</div>
 
 		<div class="card">

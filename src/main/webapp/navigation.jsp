@@ -25,7 +25,7 @@
         </li>
       </ul>
       <span class="navbar-text">
-       	Eingeloggt als: <b>${ sessionScope['bank.email'] }</b>
+       	Eingeloggt als: <b>${ sessionScope.kunde.getEmail() }</b>
       </span>
     </div>
   </div>

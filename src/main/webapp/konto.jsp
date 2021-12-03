@@ -7,11 +7,11 @@
 	<jsp:include page="navigation.jsp" />
 	
 	<div class="container">
-		<h1>Hallo ${ sessionScope['bank.vorname'] } ${ sessionScope['bank.nachname'] }</h1>
+		<h1>Hallo, ${ sessionScope.kunde.getVorname() } ${ sessionScope.kunde.getNachname() } </h1>
 		
 		<div class="card">
 		  <div class="card-body">
-		   	Sie sind angemeldet als: ${ sessionScope['bank.email'] }
+		   	Sie sind angemeldet als: ${ sessionScope.kunde.getEmail() }
 		  </div>
 		</div>
 		
@@ -33,7 +33,7 @@
 			<!--  Das Form sendet ebenfalls die email des nutzers, der sich abmelden will, damit 
 			er darüber identifiziert und abgemeldet werden kann. Die Email deshalb, weil sie im Gegensatz 
 			zum Namen eines Kunden einzigartig sein MUSS -->
-			<input type="hidden" name="email" value="${ sessionScope['bank.email'] }" />
+			<input type="hidden" name="email" value="${ sessionScope.kunde.getEmail() }" />
 		</form>
 		
 		<h2>Kontostand.xls Datei hochladen</h2>
