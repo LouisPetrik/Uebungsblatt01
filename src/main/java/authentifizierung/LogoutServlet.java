@@ -47,6 +47,8 @@ public class LogoutServlet extends HttpServlet {
 		
 		HttpSession session = request.getSession(); 
 		// redirecten auf die logout.jsp wo der Kunde noch verabschiedet wird. 
+		// Die Session wird erst danach von dem Kunden bereinigt, damit die konto.jsp noch 
+		// auf die Attribute des Kunden aus der Session zugreifen kann. 
 		request.getRequestDispatcher("logout.jsp").forward(request, response); 
 		
 		// Damit wird aus der Session nur das Kundenobjekt, also der aktuell eingeloggte Kunde entfernt 

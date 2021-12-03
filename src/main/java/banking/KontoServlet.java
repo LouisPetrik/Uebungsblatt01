@@ -71,12 +71,12 @@ public class KontoServlet extends HttpServlet {
 		
 		// Der gewünschte Kontenname des Users aus der konto.jsp 
 		String kontoname = request.getParameter("kontoname"); 
-		// Die Email des aktuell angemeldten Kunden
-		String kundenEmail = (String) session.getAttribute("bank.email"); 
+		// Die Instanz des aktuellen Kunden samt email, vorname etc. 
+		Kunde kundenInstanz = (Kunde) session.getAttribute("kunde"); 
 		
 		
 		System.out.println("User will Konto " + kontoname); 
-		System.out.println("Der user ist: " + kundenEmail); 
+		System.out.println("Der user ist: " + kundenInstanz.getEmail()); 
 		
 		
 	
@@ -86,9 +86,9 @@ public class KontoServlet extends HttpServlet {
 		// Das Kunden objekt des users, der aktuell angemeldet ist finden, um ein neues konto seiner 
 		// Liste an Konten hinzuzufügen: 
 		for (Kunde kunde : kundenliste) {
-			if (kunde.email.equals(kundenEmail)) {
+			if (kunde.email.equals(kundenInstanz.getEmail())) {
 				System.out.println("Es handelt sich um Kunden " + kunde.vorname); 
-				kunde.kontenliste.add(new Konto(kontoname, kundenEmail, 22)); 
+				kunde.kontenliste.add(new Konto(kontoname, kundenInstanz.getEmail(), 22)); 
 				
 				for (Konto konto : kunde.kontenliste) {
 					// fügt der HTML Liste ein Item hinzu 
