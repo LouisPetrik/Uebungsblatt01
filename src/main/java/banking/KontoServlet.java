@@ -83,11 +83,11 @@ public class KontoServlet extends HttpServlet {
 		
 		
 		// Das gewünschte Konto der Kontoliste des Users adden: 
-		kundenInstanz.kontenliste.add(new Konto(kontoname, kundenInstanz.getEmail(), 22)); 
+		kundenInstanz.kontenliste.add(new Konto(kontoname, kundenInstanz.getEmail())); 
 		
 		for (Konto konto : kundenInstanz.kontenliste) {
 			// fügt der HTML Liste ein Item hinzu 
-			sb.append("<li>" + konto.kontoname); 
+			sb.append("<li>" + konto.kontoname +  "</li>"); 
 		}
 		
 		
