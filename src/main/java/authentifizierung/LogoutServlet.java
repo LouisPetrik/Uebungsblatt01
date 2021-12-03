@@ -44,27 +44,8 @@ public class LogoutServlet extends HttpServlet {
 		// bisher wird hier die komplette User-Datenbank gelöscht. Aber nur die Session vom User soll gelöscht werden. 
 		System.out.println("User möchte sich abmelden"); 
 		
-		String email = request.getParameter("email"); 
 		
 		HttpSession session = request.getSession(); 
-		
-		String emailSession = (String) session.getAttribute("email"); 
-		
-		System.out.println("Email in der Session: " + emailSession); 
-		
-		
-		ArrayList<Kunde> kundenliste = (ArrayList<Kunde>) session.getAttribute("bank.kundenliste"); 
-		
-		for (Kunde kunde : kundenliste) {
-			if (kunde.email.equals(email)) {
-				
-			}
-		}
-		
-		// muss noch gegen richtigen vor und nachnamen getauscht werden. 
-		request.setAttribute("email", emailSession); 
-		request.setAttribute("vorname", kundenliste); 
-		
 		// redirecten auf die logout.jsp wo der Kunde noch verabschiedet wird. 
 		request.getRequestDispatcher("logout.jsp").forward(request, response); 
 		
