@@ -5,7 +5,7 @@
 	<jsp:include page="head.jsp" />
 <body>
 	<jsp:include page="navigation.jsp" />
-	Bis zum nächsten Mal, ${ email }!
+	Bis zum nächsten Mal, ${ kunde.getVorname() } ${ kunde.getNachname() }!
 	
 	<jsp:include page="footer.jsp" />
 </body>

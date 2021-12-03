@@ -40,7 +40,8 @@ public class LogoutServlet extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		
+	
+		// bisher wird hier die komplette User-Datenbank gelöscht. Aber nur die Session vom User soll gelöscht werden. 
 		System.out.println("User möchte sich abmelden"); 
 		
 		String email = request.getParameter("email"); 
@@ -51,7 +52,6 @@ public class LogoutServlet extends HttpServlet {
 		
 		System.out.println("Email in der Session: " + emailSession); 
 		
-
 		
 		ArrayList<Kunde> kundenliste = (ArrayList<Kunde>) session.getAttribute("bank.kundenliste"); 
 		
@@ -63,13 +63,16 @@ public class LogoutServlet extends HttpServlet {
 		
 		// muss noch gegen richtigen vor und nachnamen getauscht werden. 
 		request.setAttribute("email", emailSession); 
+		request.setAttribute("vorname", kundenliste); 
+		
+		// redirecten auf die logout.jsp wo der Kunde noch verabschiedet wird. 
 		request.getRequestDispatcher("logout.jsp").forward(request, response); 
 		
-		// session invalidieren 
+		// Damit wird aus der Session nur das Kundenobjekt, also der aktuell eingeloggte Kunde entfernt 
+		// Die gesamte Kundendatenbank die in der Sessino die registrierten Kunden verzeichnet, bleibt erhalten. 
+		// Der Kunde, der sich ausloggen will bleibt also registiert und kann sich wieder anmelden. 
+		session.removeAttribute("kunde"); 			
 		
-		session.invalidate(); 
-				
-		doGet(request, response);
 	}
 
 }

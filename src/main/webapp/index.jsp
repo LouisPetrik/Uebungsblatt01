@@ -13,13 +13,10 @@
 		<h1>Hallo ${ sessionScope.kunde.getVorname() } ${ sessionScope.kunde.getNachname() }</h1>
 		<div class="card">
 		  <div class="card-body">
-		   	Falls Sie bereits angemeldet sind, erscheint ihre E-Mail hier: 
+		   	Falls Sie bereits angemeldet sind, erscheint ihre E-Mail hier: ${ sessionScope.kunde.getEmail() }
 		  </div>
 		</div>
 		
-		<div class="alert alert-success" role="alert">
-			${ sessionScope.kunde.getEmail() }
-		</div>
 
 		<div class="card">
 		  <div class="card-body">
