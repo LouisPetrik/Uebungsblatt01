@@ -58,19 +58,18 @@ public class KontoServlet extends HttpServlet {
     
 	
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
 		
+		// Damit wir die Session hier auslesen und bearbeiten können 
 		HttpSession session = request.getSession(); 
 		
 		// Das scheint irgendwie ekelig zu sein, klappt aber. 
 		ArrayList<Kunde> kundenliste = (ArrayList<Kunde>) session.getAttribute("bank.kundenliste");
+
 		
-		ArrayList<String> kontennamenListe = new ArrayList<String>(); 
-		
-	
-		
+
 		// Der gewünschte Kontenname des Users aus der konto.jsp 
 		String kontoname = request.getParameter("kontoname"); 
+		
 		// Die Instanz des aktuellen Kunden samt email, vorname etc. 
 		Kunde kundenInstanz = (Kunde) session.getAttribute("kunde"); 
 		
@@ -78,30 +77,18 @@ public class KontoServlet extends HttpServlet {
 		System.out.println("User will Konto " + kontoname); 
 		System.out.println("Der user ist: " + kundenInstanz.getEmail()); 
 		
-		
 	
 		// Der Strinbuilder für das konstruieren der HTML Liste der Kontennamen des Kunden
 		StringBuilder sb = new StringBuilder(); 
 		
-		// Das Kunden objekt des users, der aktuell angemeldet ist finden, um ein neues konto seiner 
-		// Liste an Konten hinzuzufügen: 
-		for (Kunde kunde : kundenliste) {
-			if (kunde.email.equals(kundenInstanz.getEmail())) {
-				System.out.println("Es handelt sich um Kunden " + kunde.vorname); 
-				kunde.kontenliste.add(new Konto(kontoname, kundenInstanz.getEmail(), 22)); 
-				
-				for (Konto konto : kunde.kontenliste) {
-					// fügt der HTML Liste ein Item hinzu 
-					sb.append("<li>" + konto.kontoname); 
-					
-					// füge dem Kundenobjekt das neu erstellte Konto hinzu
-					kontennamenListe.add(konto.kontoname); 
-				}
-				
-				System.out.println("Die Liste von Konten " + kunde.kontenliste.get(0)); 
-			}
-		}
 		
+		// Das gewünschte Konto der Kontoliste des Users adden: 
+		kundenInstanz.kontenliste.add(new Konto(kontoname, kundenInstanz.getEmail(), 22)); 
+		
+		for (Konto konto : kundenInstanz.kontenliste) {
+			// fügt der HTML Liste ein Item hinzu 
+			sb.append("<li>" + konto.kontoname); 
+		}
 		
 		
 		
@@ -109,18 +96,13 @@ public class KontoServlet extends HttpServlet {
 		String kontennamenListeHTML = sb.toString(); 
 		
 		
-		// jetzt muss noch die session geupdated werden mit dem konto, was hinzugefügt wurde. 
-		
 		// what the fuck ist das? 
 		session.setAttribute("bank.kundenliste", kundenliste); 
 		
-		
+		// Die fertige HTML Liste der Konten in der Session speichern, damit konkto.jsp darauf zugreifen kann. 
 		session.setAttribute("bank.kontennamenListe", kontennamenListeHTML); 
 		
-		// Hier muss irgendwie ein redirect auf LoginServlet GET klappen 
 		
-		
-		System.out.println("Neue kontenliste: "  + kontennamenListeHTML); 
 
 		// Wichtig: Dies included nur den Inhalt der JSP, das heißt sämtliche Attribute die 
 		// beim Redirect zur konto.jsp anfänglich übergeben werden, sind verloren. Daher wurden 

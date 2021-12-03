@@ -58,6 +58,8 @@ public class RegistrierungsServlet extends HttpServlet {
 		request.setAttribute("fehlertyp", fehlertyp);
 		request.getRequestDispatcher("registrierung.jsp").forward(request, response); 
 	}
+	
+	
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// Die Logik für ein einzelnes Kundenobjekt findet sich in der entsprechenden Datei Kunde.java
 		
