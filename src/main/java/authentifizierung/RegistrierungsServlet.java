@@ -122,8 +122,8 @@ public class RegistrierungsServlet extends HttpServlet {
 
         if(!fehlerAufgetreten) {
             // Erstellen des Kundenobjekts: 
-            Kunde kunde = new Kunde(vorname, nachname, alter, email, bankinstitut, passwort, newsletter); 
-
+            Kunde kunde = new Kunde(vorname, nachname, alter, email, bankinstitut, passwort, newsletter);
+            
             kundenliste.add(kunde); 
 
             HttpSession session = request.getSession(); 

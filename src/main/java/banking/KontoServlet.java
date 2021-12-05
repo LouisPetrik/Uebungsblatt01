@@ -53,46 +53,71 @@ public class KontoServlet extends HttpServlet {
         // Damit wir die Session hier auslesen und bearbeiten können
         HttpSession session = request.getSession();
 
-        // Das scheint irgendwie ekelig zu sein, klappt aber.
-        ArrayList<Kunde> kundenliste = (ArrayList<Kunde>) session.getAttribute("bank.kundenliste");
+        Kunde kunde = (Kunde) session.getAttribute("kunde");
+        System.out.println("Der user ist: " + kunde.getEmail());
 
-        // Der gewünschte Kontenname des Users aus der konto.jsp
+        // neues Konto erstellen
         String kontoname = request.getParameter("kontoname");
+        if (kontoname != null) {
+        	System.out.println("User will Konto " + kontoname);
+        	
+            kunde.kontenliste.add(new Konto(kontoname, kunde.getEmail()));
+            
+            if (kunde.kontenAsHTML() == "") {
+            	session.setAttribute("kontenForm", "<b>Sie haben bisher keine Konten bei uns</b>"); 
+            } else {
+                StringBuilder sb = new StringBuilder();
+                sb.append("<form method='POST' action='KontoServlet'>");
+                
+                sb.append("<select name='showKonto'>");
+                sb.append(kunde.kontenAsHTML());
+            	sb.append("</select><br/>");
+            	
+            	sb.append("<input type='submit' value='Konto anzeigen'/><br/>");
+            	sb.append("<input type='submit' value='CSV hochladen'><input type='file' name='csvFile'/>");
+            	
+                sb.append("</form>");
+                
+                session.setAttribute("kontenForm", sb.toString()); 
+            }
 
-        // Die Instanz des aktuellen Kunden samt email, vorname etc.
-        Kunde kundenInstanz = (Kunde) session.getAttribute("kunde");
-
-
-        System.out.println("User will Konto " + kontoname);
-        System.out.println("Der user ist: " + kundenInstanz.getEmail());
-
-
-        // Der Strinbuilder für das konstruieren der HTML Liste der Kontennamen des Kunden
-        StringBuilder sb = new StringBuilder();
-
-        // Das gewünschte Konto der Kontoliste des Users adden:
-        kundenInstanz.kontenliste.add(new Konto(kontoname, kundenInstanz.getEmail()));
-
-        for (Konto konto : kundenInstanz.kontenliste) {
-            // fügt der HTML Liste ein Item hinzu
-            sb.append("<li>" + konto.kontoname +  "</li>");
+        } else {
+        	String selectedKonto = request.getParameter("showKonto");
+        	
+        	System.out.println("selectedKonto " + selectedKonto);
+        	if (selectedKonto != null) {
+            	int konto_idx = Integer.parseInt(selectedKonto);
+            	
+                String csvFile = request.getParameter("csvFile");
+                System.out.println("csvFile '" + csvFile + "'");
+                if (csvFile != "") {	// input type="file" has always default value "" 
+                						// so instead of null it would return ""
+                	
+                	// sollte immer true sein aber zur sicherheit
+                	if (konto_idx >= 0 && konto_idx < kunde.kontenliste.size()) {
+                		kunde.kontenliste.get(konto_idx).loadCSV(csvFile);
+                	}	              		
+                }
+                
+                StringBuilder sb = new StringBuilder();
+                sb.append("<div class=\"card\"> <div class=\"card-body\">");
+                
+                if (kunde.kontenliste.get(konto_idx).hasTxs()) {
+                	 sb.append(kunde.kontenliste.get(konto_idx).txsAsHTML());
+                } else {
+                	sb.append("<b>keine Transaktionen (laden sie eine CSV hoch)</b>");
+                }    
+                
+                sb.append("</div></div>");
+                
+                session.setAttribute("showKonto", sb.toString());
+        	}
         }
-
-        // Die fertige HTML liste die alle Namen von Konten enthält, die der User hat
-        String kontennamenListeHTML = sb.toString();
-
-        // what the fuck ist das?
-        session.setAttribute("bank.kundenliste", kundenliste);
-
-        // Die fertige HTML Liste der Konten in der Session speichern, damit konkto.jsp darauf zugreifen kann.
-        session.setAttribute("bank.kontennamenListe", kontennamenListeHTML);
-
-
+        
+        
         // Wichtig: Dies included nur den Inhalt der JSP, das heißt sämtliche Attribute die
         // beim Redirect zur konto.jsp anfänglich übergeben werden, sind verloren. Daher wurden
         // viele Daten in der Session gespeichert. 
         request.getRequestDispatcher("konto.jsp").include(request, response);
-
-        //doGet(request, response);
     }
 }

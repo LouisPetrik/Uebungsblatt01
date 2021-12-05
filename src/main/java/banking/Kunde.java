@@ -26,6 +26,21 @@ public class Kunde {
         this.newsletter = newsletter;
 
     }
+    
+    public String kontenAsHTML() {
+        if (!kontenliste.isEmpty()) {
+        	StringBuilder sb = new StringBuilder(); 
+
+        	for (int i = 0; i < kontenliste.size(); i++ ) {
+        		sb.append("<option value='" + i + "'>" + kontenliste.get(i).name + "</option>");
+        	}
+   	
+        	return sb.toString();
+        } else {
+            System.out.println("Beim Einloggen: Der Kunde hat noch keine Konten.");
+            return ""; // für KontoServlet -> kein form erstellen sondern nachricht
+        }
+    }
 
     /* Hier folgen sämtliche Getter-Methoden für das Kundenobjekt.
     Sie helfen dabei, dass Objekt-Werte in den Templates genutzt werden können und
