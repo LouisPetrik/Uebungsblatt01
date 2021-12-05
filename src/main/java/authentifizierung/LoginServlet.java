@@ -1,10 +1,16 @@
 package authentifizierung;
 
+
+//darmian ist ein fascho 
+
+
 /**
  * Dieses Servlet ist dafür da, damit sich bestehende Nutzer über die login.jsp anmelden können. 
  */
 import java.io.IOException;
 import java.util.ArrayList;
+
+
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
