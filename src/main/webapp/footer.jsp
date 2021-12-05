@@ -1,14 +1,15 @@
-<!--  hier werden die wichtigen JS dateien für bootstrap eingebunden
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
+<!--  hier werden die wichtigen JS dateien fÃƒÂ¼r bootstrap eingebunden
 und vielleicht auch noch ein kleiner footer erstellt. 
 Die Datei sollte direkt vor </body> eingebunden werden -->
 
 
 <footer class="footer bg-light text-center text-lg-start">
-  <!-- Copyright -->
-  <div class="text-center p-3 footer-text">
-    © 2021 Copyright: Best Banking
-  </div>
-  <!-- Copyright -->
+    <!-- Copyright -->
+    <div class="text-center p-3 footer-text">
+        Â© 2021 Copyright: Alla Ultras GmbH Banking
+    </div>
+    <!-- Copyright -->
 </footer>
 
 <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.10.2/dist/umd/popper.min.js" integrity="sha384-7+zCNj/IqJ95wo16oMtfsKbZ9ccEh31eOz1HGyDuCQ6wgnyJNSYdrPa03rtR1zdB" crossorigin="anonymous"></script>

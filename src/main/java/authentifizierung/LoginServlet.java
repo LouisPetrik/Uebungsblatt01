@@ -1,9 +1,7 @@
 package authentifizierung;
 
-
 /**
- * Dieses Servlet ist dafür da, damit sich bestehende Nutzer über die login.jsp anmelden können. 
- * 
+ * Dieses Servlet ist dafÃ¼r da, damit sich bestehende Nutzer Ã¼ber die login.jsp anmelden kÃ¶nnen. 
  */
 import java.io.IOException;
 import java.util.ArrayList;
@@ -21,8 +19,8 @@ import banking.Kunde;
 
 @WebServlet("/LoginServlet")
 public class LoginServlet extends HttpServlet {
-	private static final long serialVersionUID = 1L;
-       
+    private static final long serialVersionUID = 1L;
+
     /**
      * @see HttpServlet#HttpServlet()
      */
@@ -31,106 +29,102 @@ public class LoginServlet extends HttpServlet {
         // TODO Auto-generated constructor stub
         System.out.println("LoginServlet wird genutzt!"); 
     }
-    
 
     /* 
-     * 	ACHTUNG: DIESE METHODE IST EXPERIMENTEL und soll verhindern, dass beim neuladen der LoginServlet Seite 
+     *  ACHTUNG: DIESE METHODE IST EXPERIMENTEL und soll verhindern, dass beim neuladen der LoginServlet Seite 
      * die Daten verloren gehen - was leider ziemlich nervig ist. 
      */
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		request.getRequestDispatcher("konto.jsp").forward(request, response);
-	}
+    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        request.getRequestDispatcher("konto.jsp").forward(request, response);
+    }
 
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		String email = request.getParameter("email"); 
-		String passwort = request.getParameter("passwort");
-		
-		System.out.println(email); 
-		System.out.println(passwort); 
-		
-		// aus der session die kunden in eine arrayliste laden: 
-		HttpSession session = request.getSession(); 
-		// Das scheint irgendwie ekelig zu sein, klappt aber. 
-		ArrayList<Kunde> kundenliste = (ArrayList<Kunde>) session.getAttribute("bank.kundenliste"); 
-		
-		
-		// Falls auf den zustand noch mehrfach zugegriffen werden muss. 
-		Boolean eingeloggt = false; 
+    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        // TODO Auto-generated method stub
+        String email = request.getParameter("email"); 
+        String passwort = request.getParameter("passwort");
 
-		
-		// Falls die Kundenliste leer ist, und somit kein Benutzer registiert ist, 
-		// können wir uns das natürlich alles sparen. 
-		if (!(kundenliste == null)) {
-			// ab hier alles für den Fall, dass es überhaupt Kunden in der DB gibt
-			
-			/*
-			 * Testen, ob der Nutzer der sich anmelden will, wirklich registiert ist. 
-			 * Dabei nutzen wir die ArrayListe, die aus der Session geladen wurde und als DB dient. 
-			 */
-			for (Kunde kunde : kundenliste) {
-				if (kunde.email.equals(email) && kunde.passwort.equals(passwort)) {
-					eingeloggt = true; 
+        System.out.println(email); 
+        System.out.println(passwort); 
 
-					session.setAttribute("kunde", kunde); 
-					
-					// übergeben einer Liste an Konten zur Kontrolle: 
-					// dafür nur eine Liste von Namen der Konten anlegen: 
-					ArrayList<String> kontennamenListe = new ArrayList<String>(); 
-					
-					
-					// auch hier muss noch die Logik für das Erstellen einer HTML Liste an Kontennamen 
-					// durchgeführt werden, da man anfangs von LoginServlet direkt auf die konto.jsp kommt. 
-					// Dieses Servlet muss also eine liste bereitstellen, genauso wie die KontoServlet, 
-					// die nach jedem hinzugefügten Konto aufgerufen wird um eine neue HTML Liste der Konten 
-					// zu erstellen
-			
-					// Falls die Liste der Konten des Kundens NICHT leer ist
-					if (!kunde.kontenliste.isEmpty()) {
-						//  Der Strinbuilder für das konstruieren der HTML Liste der Kontennamen des Kunden
-						StringBuilder sb = new StringBuilder(); 
-						
-						for (Konto konto : kunde.kontenliste) {
-							// Der HTML Liste ein Listeneintrag mit namen des Kontos hinzufügen 
-							sb.append("<li>" + konto.kontoname + "</li>"); 
-							
-							// Hinzufügen der Konten in die Liste die zur Kontrolle dient 
-							kontennamenListe.add(konto.kontoname); 
-						}
-						
-						String kontennamenListeHTML = sb.toString(); 
-						
-						session.setAttribute("bank.kontennamenListe", kontennamenListeHTML); 
-					} else {
-						System.out.println("Beim Einloggen: Der Kunde hat noch keine Konten."); 
-						// Falls der Kunde noch keine Konten hat: 
-						session.setAttribute("bank.kontennamenListe", "<b>Sie haben bisher keine Konten bei uns</b>"); 
-					}
-					
-			
-					// nur zur überprüfung
-					System.out.println("Liste von Konten: " + kontennamenListe); 
-					
-					request.getRequestDispatcher("konto.jsp").forward(request, response);
-				} 
-			}
-			
-			if (!eingeloggt) {
-				System.out.println("Email oder passwort ist falsch"); 
-				request.setAttribute("fehlertyp", "E-Mail oder Passwort ist falsch"); 
-				
-				request.getRequestDispatcher("login.jsp").forward(request, response); 
-			} 
-			
-		// Falls es überhaupt keine Kunden gibt
-		} else {
-			System.out.println("Keine Kudnen registriert"); 
-			request.setAttribute("fehlertyp", "Es gibt keine registrierten Kunden"); 
-			
-			request.getRequestDispatcher("login.jsp").forward(request, response); 
-		}
-		
+        // aus der session die kunden in eine arrayliste laden: 
+        HttpSession session = request.getSession(); 
+        // Das scheint irgendwie ekelig zu sein, klappt aber. 
+        ArrayList<Kunde> kundenliste = (ArrayList<Kunde>) session.getAttribute("bank.kundenliste"); 
 
-	}
 
+        // Falls auf den zustand noch mehrfach zugegriffen werden muss. 
+        Boolean eingeloggt = false; 
+
+
+        // Falls die Kundenliste leer ist, und somit kein Benutzer registiert ist, 
+        // kÃ¶nnen wir uns das natÃ¼rlich alles sparen. 
+        if (!(kundenliste == null)) {
+            // ab hier alles fÃ¼r den Fall, dass es Ã¼berhaupt Kunden in der DB gibt
+
+            /*
+             * Testen, ob der Nutzer der sich anmelden will, wirklich registiert ist. 
+             * Dabei nutzen wir die ArrayListe, die aus der Session geladen wurde und als DB dient. 
+             */
+            for (Kunde kunde : kundenliste) {
+                if (kunde.email.equals(email) && kunde.passwort.equals(passwort)) {
+                    eingeloggt = true; 
+
+                    session.setAttribute("kunde", kunde); 
+
+                    // Ã¼bergeben einer Liste an Konten zur Kontrolle: 
+                    // dafÃ¼r nur eine Liste von Namen der Konten anlegen: 
+                    ArrayList<String> kontennamenListe = new ArrayList<String>(); 
+
+
+                    // auch hier muss noch die Logik fÃ¼r das Erstellen einer HTML Liste an Kontennamen 
+                    // durchgefÃ¼hrt werden, da man anfangs von LoginServlet direkt auf die konto.jsp kommt. 
+                    // Dieses Servlet muss also eine liste bereitstellen, genauso wie die KontoServlet, 
+                    // die nach jedem hinzugefÃ¼gten Konto aufgerufen wird um eine neue HTML Liste der Konten 
+                    // zu erstellen
+
+                    // Falls die Liste der Konten des Kundens NICHT leer ist
+                    if (!kunde.kontenliste.isEmpty()) {
+                        //  Der Strinbuilder fÃ¼r das konstruieren der HTML Liste der Kontennamen des Kunden
+                        StringBuilder sb = new StringBuilder(); 
+
+                        for (Konto konto : kunde.kontenliste) {
+                            // Der HTML Liste ein Listeneintrag mit namen des Kontos hinzufÃ¼gen 
+                            sb.append("<li>" + konto.kontoname + "</li>"); 
+
+                            // HinzufÃ¼gen der Konten in die Liste die zur Kontrolle dient 
+                            kontennamenListe.add(konto.kontoname); 
+                        }
+
+                        String kontennamenListeHTML = sb.toString(); 
+
+                        session.setAttribute("bank.kontennamenListe", kontennamenListeHTML); 
+                    } else {
+                        System.out.println("Beim Einloggen: Der Kunde hat noch keine Konten."); 
+                        // Falls der Kunde noch keine Konten hat: 
+                        session.setAttribute("bank.kontennamenListe", "<b>Sie haben bisher keine Konten bei uns</b>"); 
+                    }
+
+
+                    // nur zur Ã¼berprÃ¼fung
+                    System.out.println("Liste von Konten: " + kontennamenListe); 
+
+                    request.getRequestDispatcher("konto.jsp").forward(request, response);
+                } 
+            }
+
+            if (!eingeloggt) {
+                System.out.println("Email oder passwort ist falsch"); 
+                request.setAttribute("fehlertyp", "E-Mail oder Passwort ist falsch"); 
+
+                request.getRequestDispatcher("login.jsp").forward(request, response); 
+            } 
+
+        // Falls es Ã¼berhaupt keine Kunden gibt
+        } else {
+            System.out.println("Keine Kudnen registriert"); 
+            request.setAttribute("fehlertyp", "Es gibt keine registrierten Kunden"); 
+
+            request.getRequestDispatcher("login.jsp").forward(request, response); 
+        }
+    }
 }

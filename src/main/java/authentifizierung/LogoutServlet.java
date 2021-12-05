@@ -17,8 +17,8 @@ import banking.Kunde;
  */
 @WebServlet("/LogoutServlet")
 public class LogoutServlet extends HttpServlet {
-	private static final long serialVersionUID = 1L;
-       
+    private static final long serialVersionUID = 1L;
+
     /**
      * @see HttpServlet#HttpServlet()
      */
@@ -27,35 +27,32 @@ public class LogoutServlet extends HttpServlet {
         // TODO Auto-generated constructor stub
     }
 
-	/**
-	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
-	 */
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		response.getWriter().append("Served at: ").append(request.getContextPath());
-	}
+    /**
+     * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
+     */
+    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        // TODO Auto-generated method stub
+        response.getWriter().append("Served at: ").append(request.getContextPath());
+    }
 
-	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
-	 */
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-	
-		// bisher wird hier die komplette User-Datenbank gelöscht. Aber nur die Session vom User soll gelöscht werden. 
-		System.out.println("User möchte sich abmelden"); 
-		
-		
-		HttpSession session = request.getSession(); 
-		// redirecten auf die logout.jsp wo der Kunde noch verabschiedet wird. 
-		// Die Session wird erst danach von dem Kunden bereinigt, damit die konto.jsp noch 
-		// auf die Attribute des Kunden aus der Session zugreifen kann. 
-		request.getRequestDispatcher("logout.jsp").forward(request, response); 
-		
-		// Damit wird aus der Session nur das Kundenobjekt, also der aktuell eingeloggte Kunde entfernt 
-		// Die gesamte Kundendatenbank die in der Sessino die registrierten Kunden verzeichnet, bleibt erhalten. 
-		// Der Kunde, der sich ausloggen will bleibt also registiert und kann sich wieder anmelden. 
-		session.removeAttribute("kunde"); 			
-		
-	}
+    /**
+     * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
+     */
+    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        // TODO Auto-generated method stub
 
+        // bisher wird hier die komplette User-Datenbank gelÃ¶scht. Aber nur die Session vom User soll gelÃ¶scht werden. 
+        System.out.println("User mÃ¶chte sich abmelden"); 
+
+        HttpSession session = request.getSession(); 
+        // redirecten auf die logout.jsp wo der Kunde noch verabschiedet wird. 
+        // Die Session wird erst danach von dem Kunden bereinigt, damit die konto.jsp noch 
+        // auf die Attribute des Kunden aus der Session zugreifen kann. 
+        request.getRequestDispatcher("logout.jsp").forward(request, response); 
+
+        // Damit wird aus der Session nur das Kundenobjekt, also der aktuell eingeloggte Kunde entfernt 
+        // Die gesamte Kundendatenbank die in der Sessino die registrierten Kunden verzeichnet, bleibt erhalten. 
+        // Der Kunde, der sich ausloggen will bleibt also registiert und kann sich wieder anmelden. 
+        session.removeAttribute("kunde");           
+    }
 }
