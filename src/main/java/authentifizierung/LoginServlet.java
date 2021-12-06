@@ -32,8 +32,6 @@ public class LoginServlet extends HttpServlet {
      */
     public LoginServlet() {
         super();
-        // TODO Auto-generated constructor stub
-        System.out.println("LoginServlet wird genutzt!"); 
     }
 
     /* 
@@ -45,52 +43,31 @@ public class LoginServlet extends HttpServlet {
     }
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        // TODO Auto-generated method stub
         String email = request.getParameter("email"); 
         String passwort = request.getParameter("passwort");
 
-        System.out.println(email); 
-        System.out.println(passwort); 
-
-        // aus der session die kunden in eine arrayliste laden: 
-        HttpSession session = request.getSession(); 
-        // Das scheint irgendwie ekelig zu sein, klappt aber. 
+        HttpSession session = request.getSession();
         ArrayList<Kunde> kundenliste = (ArrayList<Kunde>) session.getAttribute("bank.kundenliste"); 
 
-
-        // Falls auf den zustand noch mehrfach zugegriffen werden muss. 
-        Boolean eingeloggt = false; 
-
-
-        // Falls die Kundenliste leer ist, und somit kein Benutzer registiert ist, 
-        // können wir uns das natürlich alles sparen. 
         if (kundenliste != null) {
-            // ab hier alles für den Fall, dass es überhaupt Kunden in der DB gibt
-
-            /*
-             * Testen, ob der Nutzer der sich anmelden will, wirklich registiert ist. 
-             * Dabei nutzen wir die ArrayListe, die aus der Session geladen wurde und als DB dient. 
-             */
-            for (Kunde kunde : kundenliste) {
-                if (kunde.email.equals(email) && kunde.passwort.equals(passwort)) {
-                    eingeloggt = true; 
-
-                    session.setAttribute("kunde", kunde); 
-
-                    request.getRequestDispatcher("konto.jsp").forward(request, response);
-                } 
+        	if (Validierung.hasEmail(kundenliste, email)) {
+                for (Kunde kunde : kundenliste) {
+                    if (kunde.email.equals(email) && kunde.passwort.equals(passwort)) {
+                        session.setAttribute("kunde", kunde);
+                        request.getRequestDispatcher("konto.jsp").forward(request, response);
+                        return;
+                    } 
+                }	
             }
 
-            if (!eingeloggt) {
-                System.out.println("Email oder passwort ist falsch"); 
-                request.setAttribute("fehlertyp", "E-Mail oder Passwort ist falsch"); 
+        	System.out.println("Email oder passwort ist falsch"); 
+            request.setAttribute("fehlertyp", "E-Mail oder Passwort ist falsch");
+            request.getRequestDispatcher("login.jsp").forward(request, response); 
 
-                request.getRequestDispatcher("login.jsp").forward(request, response); 
-            }
+        // für den Fall, dass es überhaupt Kunden in der DB gibt
         } else {
-            System.out.println("Keine Kudnen registriert"); 
+            System.out.println("Keine Kunden registriert"); 
             request.setAttribute("fehlertyp", "Es gibt keine registrierten Kunden"); 
-
             request.getRequestDispatcher("login.jsp").forward(request, response); 
         }
     }
