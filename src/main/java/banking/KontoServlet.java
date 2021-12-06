@@ -69,35 +69,32 @@ public class KontoServlet extends HttpServlet {
                 StringBuilder sb = new StringBuilder();
                 sb.append("<form method='POST' action='KontoServlet'>");
                 
-                sb.append("<select name='showKonto'>");
+                sb.append("<select name='selectedKonto'>");
                 sb.append(kunde.kontenAsHTML());
             	sb.append("</select><br/>");
-            	
             	sb.append("<input type='submit' value='Konto anzeigen'/><br/>");
+            	
+                sb.append("</form><br/>");
+                
+                
+                sb.append("<form method='POST' action='MultipartServlet' enctype='multipart/form-data'>");
+                
+                sb.append("<select name='selectedKonto'>");
+                sb.append(kunde.kontenAsHTML());
+            	sb.append("</select><br/>");
             	sb.append("<input type='submit' value='CSV hochladen'><input type='file' name='csvFile'/>");
             	
                 sb.append("</form>");
                 
                 session.setAttribute("kontenForm", sb.toString()); 
             }
-
+        // Konto anzeigen
         } else {
-        	String selectedKonto = request.getParameter("showKonto");
+        	String selectedKonto = request.getParameter("selectedKonto");
         	
         	System.out.println("selectedKonto " + selectedKonto);
         	if (selectedKonto != null) {
             	int konto_idx = Integer.parseInt(selectedKonto);
-            	
-                String csvFile = request.getParameter("csvFile");
-                System.out.println("csvFile '" + csvFile + "'");
-                if (csvFile != "") {	// input type="file" has always default value "" 
-                						// so instead of null it would return ""
-                	
-                	// sollte immer true sein aber zur sicherheit
-                	if (konto_idx >= 0 && konto_idx < kunde.kontenliste.size()) {
-                		kunde.kontenliste.get(konto_idx).loadCSV(csvFile);
-                	}	              		
-                }
                 
                 StringBuilder sb = new StringBuilder();
                 sb.append("<div class=\"card\"> <div class=\"card-body\">");

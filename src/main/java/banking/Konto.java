@@ -1,8 +1,9 @@
 package banking;
 
 import java.util.UUID;
+
 import java.util.ArrayList;
-import java.util.Random;
+import java.util.Scanner;
 
 import banking.Transaktion;
 
@@ -22,10 +23,39 @@ public class Konto {
         this.ID = UUID.randomUUID().toString();
     }
     
-    public void loadCSV(String path) {
+    public void loadCSV(String csvFile) {
     	System.out.println("loadCSV!");
     	
-    	txs.add(new Transaktion(path, "zu_id", "FOLGELASTSCHRIFT", "amazon", "zu_iban", 86.86f, "EUR"));
+        	Scanner scanner = new Scanner(csvFile);
+        	
+        	// um den header zu überspringen
+        	if (scanner.hasNextLine()) {        		
+        		scanner.nextLine();
+        	}
+        	
+        	if (scanner.hasNextLine()) {        		
+        		scanner.nextLine();
+        	}
+        	
+        	while (scanner.hasNextLine()) {
+        		String txString = scanner.nextLine();
+        		
+        		String fields[] = txString.split(",");
+        		
+        		// überprüfen ob "," in einem String vorkommen
+        		
+        		
+        		if (fields.length <= 15) {
+        			System.out.println("CSV hat keine gültiges Format (sollte mind./genau 16 Felder haben)!");
+        			return;
+        		}
+        		
+        		System.out.println(fields[0] + " | " + fields[5] + " | " + fields[3] + " | " + fields[4] + " | " + fields[12] + " | " + fields[14] + " | " + fields[15]);
+        		
+        		txs.add(new Transaktion(fields[0], fields[5], fields[3], fields[4], fields[12], Float.parseFloat(fields[14]), fields[15]));
+        	}
+        	
+        	scanner.close();
     }
     
     public boolean hasTxs() {
