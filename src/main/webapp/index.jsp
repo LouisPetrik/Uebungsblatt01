@@ -19,6 +19,17 @@
             </div>
         </div>
 
+        <div class="introbox">
+        	<h1>Warum ausgerechnet wir?</h1>
+        		<p>
+					weit über 450 Jahren vertrauen uns Anleger aller Einkommensklassen und legen ihr hart verdientes Geld bei uns an. <br/>
+         		   Wir garantieren Anlangen, die so viel Rendite ausschütten, dass Sie damit sogar fast ihr Geld vor der Inflation schützen. <br/>
+           		 Außerdem legen wir besonderen Wert darauf, nicht in ethisch fragwürdige Projekte zu investieren - Wenn Sie genauso wenig verstehen was wir damit meinen wie wir selbst, 
+           		 steht ihnen bei uns nichts mehr im Wege! 
+           	 </p>
+        	</div>
+        </div>
+
         <jsp:include page="footer.jsp" />
     </body>
 </html>
