@@ -32,6 +32,8 @@
             ${ sessionScope.kontenForm }
 
 			${ sessionScope.showKonto }
+
+			${ sessionScope.kontostand }
         </div>
 
         <jsp:include page="footer.jsp" />

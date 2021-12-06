@@ -1,7 +1,6 @@
 package banking;
 
 import java.io.IOException;
-import java.util.ArrayList;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -10,18 +9,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.Iterator;
-import java.util.List;
-import java.util.Map;
-import java.util.Set;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 import banking.Konto; 
 import banking.Kunde; 
@@ -71,7 +58,7 @@ public class KontoServlet extends HttpServlet {
                 
                 sb.append("<select name='selectedKonto'>");
                 sb.append(kunde.kontenAsHTML());
-            	sb.append("</select><br/>");
+            	sb.append("</select>");
             	sb.append("<input type='submit' value='Konto anzeigen'/><br/>");
             	
                 sb.append("</form><br/>");
@@ -81,7 +68,7 @@ public class KontoServlet extends HttpServlet {
                 
                 sb.append("<select name='selectedKonto'>");
                 sb.append(kunde.kontenAsHTML());
-            	sb.append("</select><br/>");
+            	sb.append("</select>");
             	sb.append("<input type='submit' value='CSV hochladen'><input type='file' name='csvFile'/>");
             	
                 sb.append("</form>");

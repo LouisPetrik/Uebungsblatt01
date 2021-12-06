@@ -107,6 +107,16 @@ public class Konto {
         	scanner.close();
     }
     
+    public float getKontostand() {
+    	float res = 0;
+    	
+    	for (Transaktion tx : txs) {
+    		res += tx.betrag;
+    	}
+    	
+    	return res;
+    }
+    
     public boolean hasTxs() {
     	return !txs.isEmpty();
     }

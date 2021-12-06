@@ -1,12 +1,12 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
-<!--  hier werden die wichtigen JS dateien fÃ¼r bootstrap eingebunden
+<!--  hier werden die wichtigen JS dateien für bootstrap eingebunden
 und vielleicht auch noch ein kleiner footer erstellt. 
 Die Datei sollte direkt vor </body> eingebunden werden -->
 
 
 <footer class="footer bg-light text-center text-lg-start">
     <!-- Copyright -->
-    <div class="text-center p-3 footer-text">
+    <div class="text-center footer-text">
         © 2021 Copyright: Alla Ultras GmbH Banking
     </div>
     <!-- Copyright -->

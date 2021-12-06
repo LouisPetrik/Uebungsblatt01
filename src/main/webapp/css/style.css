@@ -1,5 +1,37 @@
 @charset "UTF-8";
 
+nav {
+    font-size: 1rem;
+    text-decoration: none;
+}
+
+nav a {
+    font-size: 1rem;
+    text-decoration: none;
+	color: #555;
+}
+    
+nav li a::before {
+   content: '';
+   display: block;
+   height: 0.18rem;
+   background-color: #555;
+   border-radius: 0.18rem;
+   width: 60%;
+   transition: transform ease-in-out 350ms;
+}
+    
+nav a:hover::before {
+    transform: translateX(80%);
+}
+
+@media only screen and (max-width: 992px) {
+	nav li a::before {
+   	width: 7%;
+	}
+}
+
+
 h1 {
 	font-size: 30px !important; 
 	margin: 20px 0px 20px 0px; 
@@ -8,6 +40,7 @@ h1 {
 h2 {
 	font-size: 20px !important; 
 }
+
 .footer {
   position: fixed;
   left: 0;
@@ -19,5 +52,7 @@ h2 {
 
 .footer-text {
 	background-color: lightgrey; 
-	color: black; 
+	color: black;
+	font-size: 16px;
+	padding: 10px;
 }

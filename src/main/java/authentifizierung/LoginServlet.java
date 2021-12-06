@@ -1,9 +1,5 @@
 package authentifizierung;
 
-
-//darmian ist ein fascho 
-
-
 /**
  * Dieses Servlet ist dafür da, damit sich bestehende Nutzer über die login.jsp anmelden können. 
  */
@@ -35,7 +31,7 @@ public class LoginServlet extends HttpServlet {
     }
 
     /* 
-     *  ACHTUNG: DIESE METHODE IST EXPERIMENTEL und soll verhindern, dass beim neuladen der LoginServlet Seite 
+     * Soll verhindern, dass beim neuladen der LoginServlet Seite 
      * die Daten verloren gehen - was leider ziemlich nervig ist. 
      */
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
