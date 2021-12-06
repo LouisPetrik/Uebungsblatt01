@@ -23,6 +23,52 @@ public class Konto {
         this.ID = UUID.randomUUID().toString();
     }
     
+    // Wenn ein Feld ein String mit einem Komma(",") enthält wird durch split dieses Feld in
+    // zwei Felder (oder mehr bei mehreren Kommata) augeteilt.
+    // Diese methode soll diese Felder wieder zusammenfügen
+    private String[] escapeStrings(String fields[]) {
+    	int firstIdx = -1;
+		int lastIdx = -1;
+		
+		for (int i = 0; i < fields.length; i++) {
+			if (fields[i].startsWith("\"")) {
+				firstIdx = i;
+			}
+			
+			if (fields[i].endsWith("\"")) {
+				lastIdx = i;
+			}		
+		}
+		
+		if (firstIdx != -1 && lastIdx != -1)
+		{
+			String tmp[] = new String[fields.length - lastIdx + firstIdx];
+			
+			// tmp mit allen feldern füllen
+			int fi = 0;
+			for (int i = 0; i < tmp.length; i++) {
+				if(fi == firstIdx+1)
+					fi = lastIdx+1;
+				
+				tmp[i] = fields[fi];
+				fi++;
+			}
+			
+			// concat fields
+			for (int i = firstIdx + 1; i <= lastIdx; i++) {
+				tmp[firstIdx] += "," + fields[i];
+			}
+			
+			for (int i = 0; i < tmp.length; i++) {
+				System.out.println(tmp[i]);
+			}
+				
+			fields = tmp;
+		}
+		
+		return fields;
+    }
+    
     public void loadCSV(String csvFile) {
     	System.out.println("loadCSV!");
     	
@@ -32,27 +78,30 @@ public class Konto {
         	if (scanner.hasNextLine()) {        		
         		scanner.nextLine();
         	}
-        	
-        	if (scanner.hasNextLine()) {        		
-        		scanner.nextLine();
-        	}
-        	
+       	
         	while (scanner.hasNextLine()) {
         		String txString = scanner.nextLine();
         		
         		String fields[] = txString.split(",");
         		
-        		// überprüfen ob "," in einem String vorkommen
-        		
-        		
-        		if (fields.length <= 15) {
-        			System.out.println("CSV hat keine gültiges Format (sollte mind./genau 16 Felder haben)!");
+        		// siehe Kommentar über methoden definition
+        		// siehe erste Zeile der csv (grund für diese methode)
+        		fields = escapeStrings(fields);
+                		
+        		if (fields.length != 17) {
+        			System.out.println("CSV hat keine gültiges Format (sollte 17 Felder haben)!");
         			return;
         		}
         		
-        		System.out.println(fields[0] + " | " + fields[5] + " | " + fields[3] + " | " + fields[4] + " | " + fields[12] + " | " + fields[14] + " | " + fields[15]);
-        		
-        		txs.add(new Transaktion(fields[0], fields[5], fields[3], fields[4], fields[12], Float.parseFloat(fields[14]), fields[15]));
+        		float f14 = 0.f;
+        		try {
+        			 f14 = Float.parseFloat(fields[14]);
+        		} catch (NumberFormatException e) {
+        			System.out.println("Feld 15 sollte ein float sein");
+        			return;
+        		}
+        			
+        		txs.add(new Transaktion(fields[0], fields[5], fields[3], fields[4], fields[12], f14, fields[15]));
         	}
         	
         	scanner.close();
